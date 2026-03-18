@@ -16,6 +16,7 @@
         <module>energy-producer-service</module>
         <module>current-percentage-service</module>
         <module>ui-javafx</module>
+        <module>energy-communities-platform-rest-api</module>
     </modules>
 
     <properties>
