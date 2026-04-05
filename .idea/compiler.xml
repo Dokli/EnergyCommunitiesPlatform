@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
-      <module name="energy-communities-platform" target="23" />
-      <module name="shared" target="23" />
-      <module name="ui-javafx" target="23" />
-      <module name="usage-service" target="23" />
-    </bytecodeTargetLevel>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for energy-communities-platform" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+        </processorPath>
+        <module name="shared" />
+        <module name="usage-service" />
+        <module name="energy-producer-service" />
+        <module name="energy-user-service" />
+        <module name="ui-javafx" />
+        <module name="current-percentage-service" />
+        <module name="energy-communities-platform-rest-api" />
+      </profile>
+    </annotationProcessing>
   </component>
 </project>
