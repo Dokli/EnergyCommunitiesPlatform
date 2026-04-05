@@ -1,4 +1,4 @@
-package at.fhtw.disys.currentpercentage;
+package at.fhtw.disys.energycommunitiesplatformrestapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

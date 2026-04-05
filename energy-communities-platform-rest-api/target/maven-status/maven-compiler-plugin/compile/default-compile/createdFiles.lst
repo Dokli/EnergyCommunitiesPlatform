@@ -1,2 +1,3 @@
-at\fhtw\disys\usage\UsageServiceApplication.class
-at\fhtw\disys\usage\controller\UsageController.class
+at\fhtw\disys\energycommunitiesplatformrestapi\controller\EnergyCommunitiesPlatformRestApiController.class
+at\fhtw\disys\energycommunitiesplatformrestapi\dto\BookDto.class
+at\fhtw\disys\energycommunitiesplatformrestapi\EnergyCommunitiesPlatformRestApiApplication.class

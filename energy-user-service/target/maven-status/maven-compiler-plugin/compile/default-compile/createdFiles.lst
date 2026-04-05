@@ -1,2 +1,2 @@
-at\fhtw\disys\usage\UsageServiceApplication.class
-at\fhtw\disys\usage\controller\UsageController.class
+at\fhtw\disys\energyuser\controller\EnergyUserController.class
+at\fhtw\disys\energyuser\EnergyUserServiceApplication.class
