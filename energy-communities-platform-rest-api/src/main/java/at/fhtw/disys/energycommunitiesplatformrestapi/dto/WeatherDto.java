@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookDto {
+public class WeatherDto {
     private int id;
-    private String title;
-    private String genre;
+    private String city;
+    private int[] temps;
 }
