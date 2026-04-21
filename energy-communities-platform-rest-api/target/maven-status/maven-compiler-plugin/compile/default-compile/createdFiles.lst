@@ -1,3 +1,6 @@
+at\fhtw\disys\energycommunitiesplatformrestapi\dto\WeatherDto.class
+at\fhtw\disys\energycommunitiesplatformrestapi\controller\WeatherController_Example.class
+at\fhtw\disys\energycommunitiesplatformrestapi\service\EnergyCalculationService.class
 at\fhtw\disys\energycommunitiesplatformrestapi\controller\EnergyCommunitiesPlatformRestApiController.class
-at\fhtw\disys\energycommunitiesplatformrestapi\dto\BookDto.class
+at\fhtw\disys\energycommunitiesplatformrestapi\dto\EnergyDataDto.class
 at\fhtw\disys\energycommunitiesplatformrestapi\EnergyCommunitiesPlatformRestApiApplication.class
