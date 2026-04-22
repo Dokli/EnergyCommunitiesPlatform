@@ -1,3 +1,6 @@
 C:\Users\dey\IdeaProjects\EnergyCommunitiesPlatform\energy-communities-platform-rest-api\src\main\java\at\fhtw\disys\energycommunitiesplatformrestapi\controller\EnergyCommunitiesPlatformRestApiController.java
 C:\Users\dey\IdeaProjects\EnergyCommunitiesPlatform\energy-communities-platform-rest-api\src\main\java\at\fhtw\disys\energycommunitiesplatformrestapi\EnergyCommunitiesPlatformRestApiApplication.java
-C:\Users\dey\IdeaProjects\EnergyCommunitiesPlatform\energy-communities-platform-rest-api\src\main\java\at\fhtw\disys\energycommunitiesplatformrestapi\dto\BookDto.java
+C:\Users\dey\IdeaProjects\EnergyCommunitiesPlatform\energy-communities-platform-rest-api\src\main\java\at\fhtw\disys\energycommunitiesplatformrestapi\dto\EnergyDataDto.java
+C:\Users\dey\IdeaProjects\EnergyCommunitiesPlatform\energy-communities-platform-rest-api\src\main\java\at\fhtw\disys\energycommunitiesplatformrestapi\dto\WeatherDto.java
+C:\Users\dey\IdeaProjects\EnergyCommunitiesPlatform\energy-communities-platform-rest-api\src\main\java\at\fhtw\disys\energycommunitiesplatformrestapi\controller\WeatherController_Example.java
+C:\Users\dey\IdeaProjects\EnergyCommunitiesPlatform\energy-communities-platform-rest-api\src\main\java\at\fhtw\disys\energycommunitiesplatformrestapi\service\EnergyCalculationService.java
