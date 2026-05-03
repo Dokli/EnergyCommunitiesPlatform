@@ -13,7 +13,7 @@ public class EnergyCommunitiesPlatformUiApplication extends Application {
                 EnergyCommunitiesPlatformUiApplication.class.getResource("/at/fhtw/disys/uijavafx/main-view.fxml")
         );
 
-        Scene scene = new Scene(fxmlLoader.load(), 700, 450);
+        Scene scene = new Scene(fxmlLoader.load(), 750, 620);
 
         stage.setTitle("Energy Communities Platform");
         stage.setScene(scene);
