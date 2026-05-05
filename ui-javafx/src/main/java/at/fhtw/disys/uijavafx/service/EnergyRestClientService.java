@@ -13,7 +13,7 @@ import java.util.List;
 public class EnergyRestClientService {
 
     private static final String CURRENT_HOUR_URL = "http://localhost:8082/api/current-hour";
-    private static final String HISTORICAL_DATA_URL = "http://localhost:8082/energy/historical";
+    private static final String HISTORICAL_DATA_URL = "http://localhost:8082/api/historical";
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
@@ -34,7 +34,7 @@ public class EnergyRestClientService {
     }
 
     public List<EnergyDataDto> getHistoricalData(String from, String to) throws IOException, InterruptedException {
-        String url = HISTORICAL_DATA_URL + "?start=" + from + "&end=" + to;
+        String url = HISTORICAL_DATA_URL + "?from=" + from + "&to=" + to;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()

@@ -47,10 +47,10 @@ throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Se
         }
     }
 
-    @GetMapping("/historic")
+    @GetMapping("/historical")
     public List<EnergyDataDto> getHistoricData(
-            @RequestParam String from,
-            @RequestParam String to
+            @RequestParam("from") String from,
+            @RequestParam("to") String to
     ) {
 
         try {
