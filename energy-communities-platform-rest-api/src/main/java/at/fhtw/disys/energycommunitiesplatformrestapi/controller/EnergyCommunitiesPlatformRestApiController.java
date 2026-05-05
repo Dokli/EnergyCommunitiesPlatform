@@ -17,12 +17,12 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/energy")
 public class EnergyCommunitiesPlatformRestApiController {
 
     private final EnergyCalculationService calculationService;
 
-    @GetMapping("/current-hour")
+    @GetMapping("/current")
     public EnergyDataDto getCurrentHour() {
 
         try {
@@ -49,8 +49,8 @@ throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Se
 
     @GetMapping("/historical")
     public List<EnergyDataDto> getHistoricData(
-            @RequestParam("from") String from,
-            @RequestParam("to") String to
+            @RequestParam("start") String from,
+            @RequestParam("end") String to
     ) {
 
         try {
