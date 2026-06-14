@@ -1,19 +1,15 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/disysuser
-    username: disysuser
-    password: disyspw
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
   rabbitmq:
     host: localhost
     port: 5672
     username: guest
     password: guest
+
+energy:
+  producer:
+    fixed-rate-ms: 5000
+    latitude: 48.2082
+    longitude: 16.3738

@@ -1,6 +1,8 @@
 package at.fhtw.disys.uijavafx.controller;
 
+import at.fhtw.disys.uijavafx.model.CurrentPercentageDto;
 import at.fhtw.disys.uijavafx.model.EnergyDataDto;
+import at.fhtw.disys.uijavafx.service.EnergyRestClientException;
 import at.fhtw.disys.uijavafx.service.EnergyRestClientService;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -36,6 +38,8 @@ public class MainViewController {
         colProduced.setCellValueFactory(data -> new SimpleStringProperty(String.format("%.3f", data.getValue().getProducedKwh())));
         colUsed.setCellValueFactory(data -> new SimpleStringProperty(String.format("%.3f", data.getValue().getSelfConsumedKwh())));
         colGrid.setCellValueFactory(data -> new SimpleStringProperty(String.format("%.3f", data.getValue().getGridImportKwh())));
+        fromTextField.setPromptText("yyyy-MM-dd or yyyy-MM-ddTHH:mm");
+        toTextField.setPromptText("yyyy-MM-dd or yyyy-MM-ddTHH:mm");
     }
 
     @FXML
@@ -43,16 +47,14 @@ public class MainViewController {
         statusLabel.setText("Loading...");
         new Thread(() -> {
             try {
-                EnergyDataDto data = energyRestClientService.getCurrentHourData();
-                double communityDepleted = calculateCommunityDepleted(data);
-                double gridPortion = calculateGridPortion(data);
+                CurrentPercentageDto data = energyRestClientService.getCurrentHourData();
                 Platform.runLater(() -> {
-                    communityPoolUsageValueLabel.setText(String.format("%.2f %%", communityDepleted));
-                    gridPortionValueLabel.setText(String.format("%.2f %%", gridPortion));
+                    communityPoolUsageValueLabel.setText(String.format("%.2f %%", data.getCommunityDepleted()));
+                    gridPortionValueLabel.setText(String.format("%.2f %%", data.getGridPortion()));
                     statusLabel.setText("Current data loaded successfully.");
                 });
             } catch (Exception e) {
-                Platform.runLater(() -> statusLabel.setText("Error loading current data: " + e.getClass().getSimpleName()));
+                Platform.runLater(() -> statusLabel.setText("Error loading current data: " + errorMessage(e)));
             }
         }).start();
     }
@@ -70,18 +72,15 @@ public class MainViewController {
                     statusLabel.setText("Historical data loaded: " + data.size() + " records.");
                 });
             } catch (Exception e) {
-                Platform.runLater(() -> statusLabel.setText("Error loading historical data: " + e.getClass().getSimpleName()));
+                Platform.runLater(() -> statusLabel.setText("Error loading historical data: " + errorMessage(e)));
             }
         }).start();
     }
 
-    private double calculateCommunityDepleted(EnergyDataDto data) {
-        if (data.getProducedKwh() == 0) return 0;
-        return (data.getSelfConsumedKwh() / data.getProducedKwh()) * 100;
-    }
-
-    private double calculateGridPortion(EnergyDataDto data) {
-        if (data.getConsumedKwh() == 0) return 0;
-        return (data.getGridImportKwh() / data.getConsumedKwh()) * 100;
+    private String errorMessage(Exception exception) {
+        if (exception instanceof EnergyRestClientException) {
+            return exception.getMessage();
+        }
+        return exception.getClass().getSimpleName();
     }
 }

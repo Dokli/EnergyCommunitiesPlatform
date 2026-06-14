@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Energy Producer Service" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="energy-producer-service" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhtw.disys.energyproducer.EnergyProducerApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

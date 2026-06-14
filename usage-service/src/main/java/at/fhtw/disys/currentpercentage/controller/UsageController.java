@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UsageController {
 
-    @GetMapping("/api/usage/current")
-    public String getCurrentUsage() {
-        return "Usage service läuft";
+    @GetMapping("/health")
+    public String health() {
+        return "Usage service is running";
     }
 }

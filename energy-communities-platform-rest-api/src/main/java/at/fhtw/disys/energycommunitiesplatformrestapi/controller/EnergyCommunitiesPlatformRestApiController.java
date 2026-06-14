@@ -1,91 +1,86 @@
 package at.fhtw.disys.energycommunitiesplatformrestapi.controller;
 
-import at.fhtw.disys.energycommunitiesplatformrestapi.service.EnergyCalculationService;
+import at.fhtw.disys.energycommunitiesplatformrestapi.dto.CurrentPercentageDto;
 import at.fhtw.disys.energycommunitiesplatformrestapi.dto.EnergyDataDto;
+import at.fhtw.disys.energycommunitiesplatformrestapi.entity.CurrentPercentage;
+import at.fhtw.disys.energycommunitiesplatformrestapi.entity.HourlyUsage;
+import at.fhtw.disys.energycommunitiesplatformrestapi.repository.CurrentPercentageRepository;
+import at.fhtw.disys.energycommunitiesplatformrestapi.repository.HourlyUsageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
-
-
-
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/energy")
 public class EnergyCommunitiesPlatformRestApiController {
 
-    private final EnergyCalculationService calculationService;
+    private final CurrentPercentageRepository currentPercentageRepository;
+    private final HourlyUsageRepository hourlyUsageRepository;
 
     @GetMapping("/current")
-    public EnergyDataDto getCurrentHour() {
+    public CurrentPercentageDto getCurrentHour() {
+        CurrentPercentage currentPercentage = currentPercentageRepository.findTopByOrderByHourDesc()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No current percentage data available"));
 
-        try {
-            Double produced = 120.0;
-            Double consumed = 90.0;
-
-            if (produced == null) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "produced - no data for current hour");
-            }
-            if (produced == null || consumed == null) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "consumed - no data for current hour");
-            }
-
-
-            return createData(
-                    LocalDateTime.now().toString(),
-                    produced,
-                    consumed
-            );
-        } catch (Exception e) {
-throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
-        }
+        return new CurrentPercentageDto(
+                currentPercentage.getHour().toString(),
+                currentPercentage.getCommunityDepleted(),
+                currentPercentage.getGridPortion()
+        );
     }
 
     @GetMapping("/historical")
     public List<EnergyDataDto> getHistoricData(
-            @RequestParam("start") String from,
-            @RequestParam("end") String to
+            @RequestParam("start") String start,
+            @RequestParam("end") String end
     ) {
-
         try {
-            if (LocalDateTime.parse(from).isAfter(LocalDateTime.parse(to))) {
-                throw new ResponseStatusException((HttpStatus.BAD_REQUEST), "invalid request, from is after to");
+            LocalDateTime startDate = parseDateTime(start, false);
+            LocalDateTime endDate = parseDateTime(end, true);
+
+            if (startDate.isAfter(endDate)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "start must be before end");
             }
 
-
-            return List.of(
-                    createData("2026-04-21T10:00:00", 80, 100),
-                    createData("2026-04-21T11:00:00", 120, 110),
-                    createData("2026-04-21T12:00:00", 150, 100),
-                    createData("2026-04-21T13:00:00", 90, 130)
-            );
-        }
-     catch (DateTimeException e){
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "dateformat not valid");
-        }
-        catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
+            return hourlyUsageRepository.findByHourBetweenOrderByHourAsc(startDate, endDate)
+                    .stream()
+                    .map(this::toEnergyDataDto)
+                    .toList();
+        } catch (DateTimeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "date format must be ISO LocalDateTime");
         }
     }
 
-    private EnergyDataDto createData(String timestamp, double produced, double consumed) {
+    private LocalDateTime parseDateTime(String value, boolean endOfDay) {
+        String trimmed = value.strip();
+        if (trimmed.length() == 10) {
+            LocalDate date = LocalDate.parse(trimmed);
+            return endOfDay ? date.atTime(LocalTime.MAX) : date.atStartOfDay();
+        }
+        return LocalDateTime.parse(trimmed);
+    }
 
-        double selfConsumed = calculationService.calculateSelfConsumed(produced, consumed);
-        double gridImport = calculationService.calculateGridImport(produced, consumed);
-        double gridExport = calculationService.calculateGridExport(produced, consumed);
+    private EnergyDataDto toEnergyDataDto(HourlyUsage usage) {
+        double consumed = usage.getCommunityUsed() + usage.getGridUsed();
+        double gridExport = Math.max(0, usage.getCommunityProduced() - usage.getCommunityUsed());
 
-        return  new EnergyDataDto(
-                timestamp,
-                produced,
+        return new EnergyDataDto(
+                usage.getHour().toString(),
+                usage.getCommunityProduced(),
                 consumed,
-                selfConsumed,
-                gridImport,
+                usage.getCommunityUsed(),
+                usage.getGridUsed(),
                 gridExport
         );
     }

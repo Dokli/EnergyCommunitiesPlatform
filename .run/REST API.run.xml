@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="REST API" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="energy-communities-platform-rest-api" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhtw.disys.energycommunitiesplatformrestapi.EnergyCommunitiesPlatformRestApiApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
