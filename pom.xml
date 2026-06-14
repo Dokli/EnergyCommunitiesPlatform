@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>shared</module>
         <module>usage-service</module>
         <module>energy-user-service</module>
         <module>energy-producer-service</module>

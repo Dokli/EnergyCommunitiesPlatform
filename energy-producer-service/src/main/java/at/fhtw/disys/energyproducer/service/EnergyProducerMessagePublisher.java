@@ -1,9 +1,9 @@
 package at.fhtw.disys.energyproducer.service;
 
-import at.fhtw.disys.shared.message.EnergyAssociation;
-import at.fhtw.disys.shared.message.EnergyMessage;
-import at.fhtw.disys.shared.message.EnergyMessageType;
-import at.fhtw.disys.shared.rabbit.RabbitMqNames;
+import at.fhtw.disys.energyproducer.messaging.EnergyAssociation;
+import at.fhtw.disys.energyproducer.messaging.EnergyMessage;
+import at.fhtw.disys.energyproducer.messaging.EnergyMessageType;
+import at.fhtw.disys.energyproducer.messaging.RabbitMqNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

@@ -1,6 +1,6 @@
 package at.fhtw.disys.currentpercentage.config;
 
-import at.fhtw.disys.shared.rabbit.RabbitMqNames;
+import at.fhtw.disys.currentpercentage.messaging.RabbitMqNames;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;

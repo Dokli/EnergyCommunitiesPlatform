@@ -1,4 +1,4 @@
-package at.fhtw.disys.shared.rabbit;
+package at.fhtw.disys.currentpercentage.messaging;
 
 public final class RabbitMqNames {
 

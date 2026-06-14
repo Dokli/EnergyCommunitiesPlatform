@@ -1,9 +1,9 @@
 package at.fhtw.disys.energyuser.service;
 
-import at.fhtw.disys.shared.message.EnergyAssociation;
-import at.fhtw.disys.shared.message.EnergyMessage;
-import at.fhtw.disys.shared.message.EnergyMessageType;
-import at.fhtw.disys.shared.rabbit.RabbitMqNames;
+import at.fhtw.disys.energyuser.messaging.EnergyAssociation;
+import at.fhtw.disys.energyuser.messaging.EnergyMessage;
+import at.fhtw.disys.energyuser.messaging.EnergyMessageType;
+import at.fhtw.disys.energyuser.messaging.RabbitMqNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -46,7 +46,7 @@ public class EnergyUserMessagePublisher {
         if ((hour >= 6 && hour <= 9) || (hour >= 17 && hour <= 21)) {
             return 1.6;
         }
-        if (hour >= 0 && hour <= 5) {
+        if (hour <= 5) {
             return 0.45;
         }
         return 1.0;

@@ -1,6 +1,6 @@
 package at.fhtw.disys.currentpercentage.config;
 
-import at.fhtw.disys.shared.rabbit.RabbitMqNames;
+import at.fhtw.disys.currentpercentage.messaging.RabbitMqNames;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -10,6 +10,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,19 +33,18 @@ public class RabbitMqConfig {
     }
 
     @Bean
-    Binding energyMessagesBinding(Queue energyMessagesQueue, DirectExchange energyExchange) {
+    Binding energyMessagesBinding(@Qualifier("energyMessagesQueue") Queue energyMessagesQueue, DirectExchange energyExchange) {
         return BindingBuilder.bind(energyMessagesQueue)
                 .to(energyExchange)
                 .with(RabbitMqNames.ENERGY_MESSAGE_ROUTING_KEY);
     }
 
     @Bean
-    Binding usageUpdatesBinding(Queue usageUpdatesQueue, DirectExchange energyExchange) {
+    Binding usageUpdatesBinding(@Qualifier("usageUpdatesQueue") Queue usageUpdatesQueue, DirectExchange energyExchange) {
         return BindingBuilder.bind(usageUpdatesQueue)
                 .to(energyExchange)
                 .with(RabbitMqNames.USAGE_UPDATED_ROUTING_KEY);
     }
-
     @Bean
     MessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();

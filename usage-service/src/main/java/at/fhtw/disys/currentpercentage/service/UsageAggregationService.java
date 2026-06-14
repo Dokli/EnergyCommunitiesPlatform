@@ -2,10 +2,10 @@ package at.fhtw.disys.currentpercentage.service;
 
 import at.fhtw.disys.currentpercentage.entity.HourlyUsage;
 import at.fhtw.disys.currentpercentage.repository.HourlyUsageRepository;
-import at.fhtw.disys.shared.message.EnergyMessage;
-import at.fhtw.disys.shared.message.EnergyMessageType;
-import at.fhtw.disys.shared.message.UsageUpdatedMessage;
-import at.fhtw.disys.shared.rabbit.RabbitMqNames;
+import at.fhtw.disys.currentpercentage.messaging.EnergyMessage;
+import at.fhtw.disys.currentpercentage.messaging.EnergyMessageType;
+import at.fhtw.disys.currentpercentage.messaging.UsageUpdatedMessage;
+import at.fhtw.disys.currentpercentage.messaging.RabbitMqNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
