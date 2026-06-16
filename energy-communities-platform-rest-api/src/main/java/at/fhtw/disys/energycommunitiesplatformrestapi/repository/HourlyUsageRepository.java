@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface HourlyUsageRepository extends JpaRepository<HourlyUsage, LocalDateTime> {
 
-    List<HourlyUsage> findByHourBetween(LocalDateTime start, LocalDateTime end);
+    List<HourlyUsage> findByHourBetweenOrderByHourAsc(LocalDateTime start, LocalDateTime end);
 }

@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Current Percentage Service" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="current-percentage-service" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhtw.disys.currentpercentage.CurrentPercentageApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

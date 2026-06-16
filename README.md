@@ -1,6 +1,62 @@
 # EnergyCommunitiesPlatform
 A distributed system for energy communities where producers and consumers exchange energy data via a message queue. Services calculate community and grid usage and determine hourly energy distribution percentages. A GUI displays real-time energy flow and allows querying historical data.
 
+## Running the project
+
+The Spring services are separate applications and use different ports so they can run at the same time:
+
+| Component | Port |
+| --- | --- |
+| REST API | 8082 |
+| Energy Producer Service | 8083 |
+| Energy User Service | 8084 |
+| Usage Service | 8085 |
+| Current Percentage Service | 8086 |
+
+Start PostgreSQL, RabbitMQ and all Spring services:
+
+```powershell
+.\scripts\start-all.ps1
+```
+
+In IntelliJ, use the shared run configurations from the `.run` directory:
+
+- `All Spring Services` starts the five Spring Boot services in IntelliJ.
+- `All Services and UI` starts the Spring Boot services and the JavaFX UI.
+- The individual service configurations can be started/stopped separately.
+
+Before starting the IntelliJ configurations, make sure PostgreSQL and RabbitMQ are running:
+
+```powershell
+docker compose up -d
+```
+
+If old service processes still occupy the ports, stop them with:
+
+```powershell
+.\scripts\stop-all.ps1
+```
+
+Start only the infrastructure:
+
+```powershell
+docker compose up -d
+```
+
+Run one service manually:
+
+```powershell
+.\mvnw.cmd -pl usage-service spring-boot:run
+```
+
+Run the JavaFX UI after the REST API is running:
+
+```powershell
+.\mvnw.cmd -pl ui-javafx javafx:run
+```
+
+RabbitMQ Management UI is available at http://localhost:15672 with `guest` / `guest`.
+
 # Docker config file
 ## Docker setup for DISYS project
 This Docker Compose configuration includes two essential containers for the project's infrastructure. The first container hosts the database, providing persistent storage and efficient management for the project's data. It ensures reliability and scalability, making it suitable for handling the application's data transactions. The second container is configured as a queue, which facilitates asynchronous task processing and communication between various components of the project. This setup improves system performance by decoupling workloads and enhancing the application's ability to handle concurrent operations. Together, these containers provide a robust and scalable foundation for the project's backend systems.

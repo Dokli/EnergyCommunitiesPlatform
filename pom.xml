@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>shared</module>
         <module>usage-service</module>
         <module>energy-user-service</module>
         <module>energy-producer-service</module>
@@ -32,7 +31,6 @@
 
         <javafx.version>21.0.2</javafx.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
-        <bootstrapfx.version>0.4.0</bootstrapfx.version>
         <junit.version>5.10.2</junit.version>
         <jackson.version>2.17.2</jackson.version>
     </properties>
@@ -72,12 +70,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.kordamp.bootstrapfx</groupId>
-                <artifactId>bootstrapfx-core</artifactId>
-                <version>${bootstrapfx.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>${junit.version}</version>
@@ -89,17 +81,6 @@
                 <version>${jackson.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

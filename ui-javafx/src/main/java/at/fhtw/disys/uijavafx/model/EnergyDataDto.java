@@ -13,5 +13,4 @@ public class EnergyDataDto {
     private double consumedKwh;
     private double selfConsumedKwh;
     private double gridImportKwh;
-    private double gridExportKwh;
 }

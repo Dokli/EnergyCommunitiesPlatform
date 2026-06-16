@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Usage Service" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="usage-service" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhtw.disys.currentpercentage.UsageServiceApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
